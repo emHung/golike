@@ -55,8 +55,7 @@ class GolikeAPI:
         """Lấy danh sách tài khoản theo platform"""
         endpoints = {
             'tiktok': 'https://gateway.golike.net/api/tiktok-account',
-            'facebook': 'https://gateway.golike.net/api/fb-account',
-            'instagram': 'https://gateway.golike.net/api/instagram-account'
+            'facebook': 'https://gateway.golike.net/api/fb-account'
         }
         
         endpoint = endpoints.get(platform.lower())

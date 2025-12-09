@@ -17,8 +17,8 @@ Tool tự động làm nhiệm vụ trên Golike.net hỗ trợ TikTok, Facebook
 
 ```bash
 # Clone repo
-git clone <repo-url>
-cd golike-auto
+git clone https://github.com/emHung/golike.git
+cd golike
 
 # Cài đặt thư viện
 pip install requests
@@ -37,8 +37,8 @@ pkg install python
 pkg install git
 
 # Clone repo
-git clone <repo-url>
-cd golike-auto
+git clone https://github.com/emHung/golike.git
+cd golike
 
 # Cài đặt thư viện
 pip install requests

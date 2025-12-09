@@ -35,35 +35,20 @@ def show_user_info(api: GolikeAPI):
     
     user_info = api.get_user_info()
     if user_info:
+        # Lấy danh sách đợi duyệt trước để tính total_pending
+        pending_logs = api.get_pending_logs(limit=30)
+        total_pending = 0
+        
+        if pending_logs:
+            for log in pending_logs:
+                price = log.get('prices', 0)
+                total_pending += price
+        
+        # Hiển thị thông tin tài khoản với total_pending tính từ danh sách job
         print(f"\n👤 Tên: {user_info['name']}")
         print(f"💰 Coin: {user_info['coin']:,}")
-        print(f"⏳ Tiền đợi duyệt: {user_info['prices']:,}")
+        print(f"⏳ Tiền đợi duyệt: {total_pending:,}")
         print(f"🎭 Role: {user_info['role']}")
-        
-        # Lấy danh sách đợi duyệt
-        print("\n" + "-"*60)
-        print("📋 DANH SÁCH JOB ĐANG CHỜ DUYỆT")
-        print("-"*60)
-        
-        pending_logs = api.get_pending_logs(limit=30)
-        if pending_logs:
-            total_pending = 0
-            print(f"\nSố lượng job đang chờ: {len(pending_logs)}")
-            print("\n{:<5} {:<15} {:<20} {:<15}".format("STT", "Loại", "Object ID", "Giá"))
-            print("-"*60)
-            
-            for idx, log in enumerate(pending_logs, 1):
-                object_type = log.get('object_type', 'N/A')
-                object_id = log.get('object_id', 'N/A')
-                price = log.get('price', 0)
-                total_pending += price
-                
-                print(f"{idx:<5} {object_type:<15} {str(object_id):<20} {price:,}")
-            
-            print("-"*60)
-            print(f"💵 Tổng tiền đợi duyệt: {total_pending:,}")
-        else:
-            print("\n✅ Không có job nào đang chờ duyệt")
     else:
         print("\n❌ Không thể lấy thông tin tài khoản")
     
